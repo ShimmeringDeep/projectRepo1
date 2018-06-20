@@ -1,21 +1,60 @@
-<!doctype html>
-
+  
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DaMoJo</title>
+  
+  <!-- Compressed foundation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-
-  <link rel="stylesheet" href="assets/style/style.css">
-
-  <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-  <![endif]-->
+  <!--font awesome-->  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
+  
+  <!--css-->  
+  <link type="text/css" rel="stylesheet" href="assets/style/style.css">
+  
 </head>
-
 <body>
-  <script src="js/scripts.js"></script>
+ 
+  
+
+
+
+<div class="grid-container">
+	<h1 class="text-center">DaMoJo</h1>
+	<h3 class="text-center subtitle">An Event Planner Powered by the Eventful API</h3>
+	
+	
+	<label class="label" for="eventLocationQuery">Enter a Location</label>
+	<input type="search" name="eventLocationQuery" id="eventLocationQuery" placeholder="Houston, TX" /><!-- capture users value input and return results using api -->
+	<button class="button expanded">Submit</button>
+	
+	<div class="card">
+	  <div class="card-divider">
+	    <h3>Event Results</h3>
+	  </div><!-- Card Divider-->
+	  
+	  <div class="card-section">
+	    <div id="primaryResults"></div><!-- This is where javascript and AJAx will return the data from the eventful API -->
+	  </div><!-- Card Section-->
+	</div><!-- Card -->
+	
+</div><!-- Grid Container -->
+
+<!--jquery-->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+
+<!-- Compressed foundation JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+
+<!--javascript-->  
+<script type="text/javascript" src="assets/javascript/logic.js"></script>
+
 </body>
 </html>

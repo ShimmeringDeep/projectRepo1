@@ -1,5 +1,23 @@
-body {
-  background: black;
+/* global variables
+____________________________*/
+/* Google Fonts Link */
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One");
+* {
+  font-family: "Fira Sans Condensed", sans-serif;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Patua One", cursive;
+}
+
+.grid-container {
+  margin-top: 20vh;
+}
+
 
 /*# sourceMappingURL=assets/style/style.css.map */
