@@ -1,3 +1,30 @@
+/*
+#f5f6c4 - lime green
+#464b5b - dark blue
+#71918f - dark teal
+#bee3db - light teal
+#faf9f9 - white
+*/
+
+/* global variables
+_____________________________________*/
+
+
+
+
+$blue: #246EB9;
+$white:#fdfffc;
+$darkestBlue: #0A1E33;
+$darkGrey: #353532;
+
+
+
+body {
+	background-color: $darkestBlue;
+}
+
+
+
 /* global variables
 ____________________________*/
 
@@ -17,8 +44,31 @@ h4,
 h5,
 h6 {
 	 font-family: 'Patua One', cursive;
+	 color: $white;
+	 
 }
 .grid-container {
 	margin-top: 20vh;
-} // this code makes the grid-container 20% of the viewport height, always.
+// this code makes the grid-container 20% of the viewport height, always.	
+	label, button {
+		background-color: $blue;
+		font-size: large;
+	
+	}
+	
+	#title {
+		margin-bottom: 30px;
+	}
+
+} 
+
+
+.card-divider {
+	background-color: $darkGrey;
+}
+
+
+
+
+
 
