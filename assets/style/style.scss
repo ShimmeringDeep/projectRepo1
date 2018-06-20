@@ -9,16 +9,65 @@
 /* global variables
 _____________________________________*/
 
-$cream : #f5f6c4;
-$darkBlue: #464B5B;
-$darkTeal: #71918f;
-$lightTeal: #bee3db;
-$white: #faf9f9;
+
+
+
+$blue: #246EB9;
+$white:#fdfffc;
+$darkestBlue: #0A1E33;
+$darkGrey: #353532;
+
 
 
 body {
-	color: $darkBlue;
+	background-color: $darkestBlue;
 }
+
+
+
+/* global variables
+____________________________*/
+
+
+
+/* Google Fonts Link */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One');
+
+* {
+	font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	 font-family: 'Patua One', cursive;
+	 color: $white;
+	 
+}
+.grid-container {
+	margin-top: 20vh;
+// this code makes the grid-container 20% of the viewport height, always.	
+	label, button {
+		background-color: $blue;
+		font-size: large;
+	
+	}
+	
+	#title {
+		margin-bottom: 30px;
+	}
+
+} 
+
+
+.card-divider {
+	background-color: $darkGrey;
+}
+
+
 
 
 

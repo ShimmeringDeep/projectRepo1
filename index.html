@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +18,31 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
   
   <!--css-->  
-    <link type="text/css" rel="stylesheet" href="assets/style/style.css">
+  <link type="text/css" rel="stylesheet" href="assets/style/style.css">
   
-  
-    
 </head>
 <body>
 
-<h2>This is a heading</h2>    
- 
- <p>This is a paragraph</p>   
+<div class="grid-container">
+	<h1 class="text-center" id="title">DaMoJo</h1>
+	<h3 class="text-center subtitle">An Event Planner Powered by the Eventful API</h3>
+	
+	
+	<label class="label" for="eventLocationQuery">Enter a Location</label>
+	<input type="search" name="eventLocationQuery" id="eventLocationQuery" placeholder="Houston, TX" /><!-- capture users value input and return results using api -->
+	<button class="button expanded">Submit</button>
+	
+	<div class="card">
+	  <div class="card-divider">
+	    <h3>Event Results</h3>
+	  </div><!-- Card Divider-->
+	  
+	  <div class="card-section">
+	    <div id="primaryResults"></div><!-- This is where javascript and AJAx will return the data from the eventful API -->
+	  </div><!-- Card Section-->
+	</div><!-- Card -->
+	
+</div><!-- Grid Container -->
 
 <!--jquery-->
 <script
@@ -39,5 +55,6 @@ crossorigin="anonymous"></script>
 
 <!--javascript-->  
 <script type="text/javascript" src="assets/javascript/logic.js"></script>
+
 </body>
 </html>
