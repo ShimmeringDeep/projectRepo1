@@ -11,4 +11,13 @@ body {
   color: #464B5B;
 }
 
+h2 {
+	font-family: 'Patua One', cursive;
+}
+
+p {
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+
 /*# sourceMappingURL=assets/style/style.css.map */
