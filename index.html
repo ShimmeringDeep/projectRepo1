@@ -30,7 +30,7 @@
 	
 	<label class="label" for="eventLocationQuery">Enter a Location</label>
 	<input type="search" name="eventLocationQuery" id="eventLocationQuery" placeholder="Houston, TX" /><!-- capture users value input and return results using api -->
-	<button class="button expanded">Submit</button>
+	<button class="button expanded" id="submit">Submit</button>
 	
 	<div class="card">
 	  <div class="card-divider">
@@ -38,7 +38,17 @@
 	  </div><!-- Card Divider-->
 	  
 	  <div class="card-section">
-	    <div id="primaryResults"></div><!-- This is where javascript and AJAx will return the data from the eventful API -->
+	    <div id="primaryResults">
+			<table id="results">
+
+				<tr>
+					<th>Event Name</th>	
+					<th>Event Date</th>
+					<th>Number of Attendees</th>
+				</tr>
+
+			</table>	
+			</div><!-- This is where javascript and AJAx will return the data from the eventful API -->
 	  </div><!-- Card Section-->
 	</div><!-- Card -->
 	
