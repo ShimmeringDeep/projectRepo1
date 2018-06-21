@@ -43,5 +43,10 @@ h6 {
 .card-divider {
   background-color: #353532;
 }
+td{
+  text-align: center;
+  margin: 0 auto;
+  
+}
 
 /*# sourceMappingURL=assets/style/style.css.map */
