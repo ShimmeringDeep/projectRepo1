@@ -33,6 +33,16 @@ h6 {
     margin-bottom: 30px; }
 
 .card-divider {
+<<<<<<< HEAD
   background-color: #353532; }
+=======
+  background-color: #353532;
+}
+td{
+  text-align: center;
+  margin: 0 auto;
+  
+}
+>>>>>>> f4d9288a851e9a48d5cd4199ef42dd7a684afc5f
 
 /*# sourceMappingURL=style.css.map */
