@@ -27,14 +27,15 @@
 <body>
 
 	<div class="grid-container">
-		<h1 class="text-center" id="title">DaMoJo</h1>
-		<h3 class="text-center subtitle">An Event Planner Powered by the Eventful API</h3>
-
+		<div class="div-title">
+			<h1 class="text-center" id="title">DaMoJo</h1>
+			<h3 class="text-center subtitle">An Event Planner Powered by the Eventful API</h3>
+		</div>	
 		<div id="searchBarSection">
 			<label class="label" for="eventLocationQuery">Enter a Location</label>
 			<input type="search" name="eventLocationQuery" id="eventLocationQuery" placeholder="Houston, TX" />
 			<!-- capture users value input and return results using api -->
-			<button class="button expanded" id="submit">Submit</button>
+			<button class="button" id="submit">Submit</button>
 		</div>
 		<div class="card">
 			<div class="card-divider">
@@ -46,11 +47,11 @@
 				<div id="primaryResults">
 					<table id="results">
 						<thead>
-							<th>Event Name</th>
-							<th>Event Date</th>
-							<th>Wrist Color</th>
-							<th>Venue</th>
-							<th>Number of Attendees</th>
+							<th id="name">Event Name</th>
+							<th id="date">Event Date</th>
+							<th id="color">Wrist Color</th>
+							<th id="venue">Venue</th>
+							<th id="attendees">Number of Attendees</th>
 						</thead>
 						<!-- This is where javascript and AJAx will return the data from the eventful API -->
 					</table>
