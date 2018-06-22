@@ -8,10 +8,6 @@
 
 /* global variables
 _____________________________________*/
-
-
-
-
 $blue: #246EB9;
 $white:#fdfffc;
 $darkestBlue: #0A1E33;
@@ -23,10 +19,6 @@ body {
 	background-color: $darkestBlue;
 }
 
-
-
-/* global variables
-____________________________*/
 
 
 
@@ -47,25 +39,26 @@ h6 {
 	 color: $white;
 	 
 }
+
 .grid-container {
 	margin-top: 20vh;
 // this code makes the grid-container 20% of the viewport height, always.	
-	label, button {
-		background-color: $blue;
-		font-size: large;
-	
-	}
-	
-	#title {
-		margin-bottom: 30px;
-	}
 
+label, button {
+	background-color: $blue;
+	font-size: large;
+
+}
+
+#title {
+	margin-bottom: 30px;
+}
 } 
-
 
 .card-divider {
 	background-color: $darkGrey;
 }
+
 
 
 

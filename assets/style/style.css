@@ -9,15 +9,11 @@
 _____________________________________*/
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One");
 body {
-  background-color: #0A1E33;
-}
+  background-color: #0A1E33; }
 
-/* global variables
-____________________________*/
 /* Google Fonts Link */
 * {
-  font-family: "Fira Sans Condensed", sans-serif;
-}
+  font-family: 'Fira Sans Condensed', sans-serif; }
 
 h1,
 h2,
@@ -25,23 +21,18 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Patua One", cursive;
-  color: #fdfffc;
-}
+  font-family: 'Patua One', cursive;
+  color: #fdfffc; }
 
 .grid-container {
-  margin-top: 20vh;
-}
-.grid-container label, .grid-container button {
-  background-color: #246EB9;
-  font-size: large;
-}
-.grid-container #title {
-  margin-bottom: 30px;
-}
+  margin-top: 20vh; }
+  .grid-container label, .grid-container button {
+    background-color: #246EB9;
+    font-size: large; }
+  .grid-container #title {
+    margin-bottom: 30px; }
 
 .card-divider {
-  background-color: #353532;
-}
+  background-color: #353532; }
 
-/*# sourceMappingURL=assets/style/style.css.map */
+/*# sourceMappingURL=style.css.map */
