@@ -68,9 +68,20 @@ $("#submit").on("click", function (event) { //submit button click event (ajax ca
             database.ref().push(eventObj);
             // store event in firebase
 
+
+
         }
+
+        //click event for modal (-comment and code right below done by mohammed)
+        $(".eventRow").on("click", function(event) {
+        //modal activation goes here    
+        console.log("This works");
+        });
+
     })
 });
+
+
 
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url
