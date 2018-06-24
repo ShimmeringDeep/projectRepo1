@@ -55,7 +55,7 @@ $("#submit").on("click", function (event) { //submit button click event (ajax ca
                 attendees: 0
             };
 
-            var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", event.eventID); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
+            var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", event.eventID).attr("data-open", event.id); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
             titleD = $("<td>").text(eventObj.title); //create table data elements with text content
             dateD = $("<td>").text(eventObj.start);
             colorD = $("<td>").text(eventObj.color); //TO DO get this variable from firebase instead
@@ -65,6 +65,7 @@ $("#submit").on("click", function (event) { //submit button click event (ajax ca
             $("#results").append(newRow) //appends that newRow (along with its children) to the DOM
 
 
+
             database.ref().push(eventObj);
             // store event in firebase
 
@@ -72,10 +73,42 @@ $("#submit").on("click", function (event) { //submit button click event (ajax ca
 
         }
 
+
         //click event for modal (-comment and code right below done by mohammed)
-        $(".eventRow").on("click", function(event) {
-        //modal activation goes here    
-        console.log("This works");
+        $(".eventRow").on("click", function () {
+            //modal reveal
+            var $modal = $('<div>');
+            $modal.attr('data-reveal', '');
+            $modal.addClass('reveal')
+            var id = $(this).attr("data-open");
+            $modal.attr('id', id)
+            $modal.html(result).foundation();
+
+            //Modal Content
+            var h1 = $('<h1>');
+            h1.text(eventObj.title);
+            var h3 = $('<h3>');
+            h3.text(event.venue_address);
+            var p = $('<p>');
+            p.text(event.description);
+            //End Content
+
+            //Append/Prepend Content to modal
+            $modal.append(h1);
+            $modal.append(h3);
+            $modal.append(p);
+            
+            
+            
+
+            
+
+            $("#modalContainer").append($modal);
+    
+        
+            //  modalDiv.className = "reveal";
+            
+
         });
 
     })
