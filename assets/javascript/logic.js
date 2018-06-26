@@ -64,10 +64,10 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                     }
                 });
 
-                console.log("after for each loop");
+        
 
                 if (checkArr.length > 0) {
-                    console.log(checkArr[0]);
+                 
                     eventObj = checkArr[0];
 
                     var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", event.id).attr("data-open", event.id); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
@@ -80,7 +80,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                     $("#results").append(newRow) //appends that newRow (along with its children) to the DOM             
                 }
                 else {
-                    var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", event.id).attr("data-open", event.id); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
+                    var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", eventObj.eventID).attr("data-open", eventObj.eventID); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
                     titleD = $("<td>").text(eventObj.title); //create table data elements with text content
                     dateD = $("<td>").text(eventObj.start);
                     colorD = $("<td>").text(eventObj.color); //TO DO get this variable from firebase instead
@@ -97,10 +97,68 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 });
 
 
+
+
 //click event for modal (-comment and code right below done by mohammed)
-$(".eventRow").on("click", function (event) {
+$("body").on("click", ".eventRow", function (event) {
     //modal activation goes here    
-    console.log("This works");
+    //modal reveal
+    var rowID = $(this).attr("data-event-id")
+    var id = $(this).attr("data-open");
+    let modalObj;
+    database.ref().once('value').then(function (snapshot) {
+        console.log(rowID)
+        snapshot.forEach(function (childSnapshot) {
+            if (childSnapshot.val().eventID === rowID) {
+                modalObj = childSnapshot.val();
+            }
+        });
+        var $modal = $('<div>');
+    $modal.attr('data-reveal', '');
+    $modal.addClass('reveal')
+    $modal.attr('id', id)
+    var title = $('<h1>').text(modalObj.title).addClass('leftModalSection');
+    var address = $('<h3>').text(modalObj.address).addClass('leftModalSection');
+    var venue = $('<h3>').text(modalObj.venue).addClass('leftModalSection');
+    var time = $('<h3>').text(modalObj.start).addClass('rightModalSection');
+    var wristbandColor = $('<h3>').text(modalObj.color).addClass('rightModalSection');
+    var attendees = $('<h3>').text(modalObj.attendees).attr("id", "attendee")
+
+    $modal.append(title, address, venue, time, wristbandColor, attendees)
+    $modal.foundation();
+    console.log(modalObj)
+    //Modal Content
+    // var h1 = $('<h1>');
+    // h1.text(modalObj.title);
+    // var h3 = $('<h3>');
+    // h3.text(modalObj.venue_address);
+    // var p = $('<p>');
+    // p.text(modalObj.description);
+    //End Content
+
+    //Append/Prepend Content to modal
+    // $modal.append(h1);
+    // $modal.append(h3);
+    // $modal.append(p);
+    $("#modalContainer").append($modal);
+        console.log(modalObj)
+    
+    } );
+
+    
+        
+        
+        
+
+
+
+
+
+    // modalDiv.className = "reveal";
+
+
+
+
 });
 
 
