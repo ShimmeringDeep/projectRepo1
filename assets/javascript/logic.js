@@ -122,7 +122,7 @@ $("body").on("click", ".eventRow", function (event) {
     var venue = $('<h3>').text(modalObj.venue).addClass('leftModalSection');
     var time = $('<h3>').text(modalObj.start).addClass('rightModalSection');
     var wristbandColor = $('<h3>').text(modalObj.color).addClass('rightModalSection');
-    var attendees = $('<h3>').text(modalObj.attendees).attr("id", "attendee")
+    var attendees = $('<h3>').text(modalObj.attendees).addClass('leftModalSection').attr("id", "attendee")
 
     $modal.append(title, address, venue, time, wristbandColor, attendees)
     $modal.foundation();
