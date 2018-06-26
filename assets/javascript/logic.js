@@ -64,102 +64,133 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                     }
                 });
 
-        
-
                 if (checkArr.length > 0) {
-                 
+                    console.log(checkArr[0]);
                     eventObj = checkArr[0];
+					  
+					  let results = `
+					  <div data-event-\id\="${event.id}" class="results">
+					  	<div>
+					  		<p><span class="bold">title:</span> ${eventObj.title}</p>
+					  		
+					  		<p><span class="bold">time:</span> ${eventObj.start}</p>
+					  		
+					  		<p><span class="bold">venue:</span> ${eventObj.venue}</p>
+					  	</div>
+					  	
+					  	<div class="rightModalSection">
+					  		<p><span class="bold">attendees:</span> ${eventObj.attendees}</p>
+					  		
+					  		<p><span class="bold">wristband color:</span> ${eventObj.color}</p>
+					  		
+					  		<button class="button small openModal" data-open="${event.id}">More Info!</button>
+					  	</div>
+					  </div>
+					  <hr />
+					  `;
+	
+					  document.querySelector('#primaryResults').innerHTML += results;
+                } else {
+                   let results = `
+                   	<div data-event-\id\="${event.id}" class="results">
+                   		<div>
+                   			<p><span class="bold">title:</span> ${eventObj.title}</p>
+                   				  		
+                   			<p><span class="bold">time:</span> ${eventObj.start}</p>
+                   				  		
+                   			<p><span class="bold">venue:</span> ${eventObj.venue}</p>
+                   		</div>
+                   				  	
+                   		<div class="rightModalSection">
+                   			<p><span class="bold">attendees:</span> ${eventObj.attendees}</p>
+                   				  		
+                   			<p><span class="bold">wristband color:</span> ${eventObj.color}</p>
+                   				  		
+                   			<button class="button small openModal" data-open="${event.id}">More Info!</button>
+                   		</div>
+                   	</div>
+                   	<hr /> `;
+                   
+                   	document.querySelector('#primaryResults').innerHTML += results;
 
-                    var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", event.id).attr("data-open", event.id); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
-                    titleD = $("<td>").text(eventObj.title); //create table data elements with text content
-                    dateD = $("<td>").text(eventObj.start);
-                    colorD = $("<td>").text(eventObj.color); //TO DO get this variable from firebase instead
-                    venueD = $("<td>").text(eventObj.venue);
-                    attendeesD = $("<td>").text(eventObj.attendees); //TO DO get this variable from firebase instead
-                    newRow.append(titleD, dateD, colorD, venueD, attendeesD); // appends that text content to the newRow we declared earlier
-                    $("#results").append(newRow) //appends that newRow (along with its children) to the DOM             
-                }
-                else {
-                    var newRow = $("<tr>").attr("class", "eventRow").attr("data-event-id", eventObj.eventID).attr("data-open", eventObj.eventID); //creates a new row with a class for styling and scripting and a data with the unique ID of the event stored within it
-                    titleD = $("<td>").text(eventObj.title); //create table data elements with text content
-                    dateD = $("<td>").text(eventObj.start);
-                    colorD = $("<td>").text(eventObj.color); //TO DO get this variable from firebase instead
-                    venueD = $("<td>").text(eventObj.venue);
-                    attendeesD = $("<td>").text(eventObj.attendees); //TO DO get this variable from firebase instead
-                    newRow.append(titleD, dateD, colorD, venueD, attendeesD); // appends that text content to the newRow we declared earlier
-                    $("#results").append(newRow) //appends that newRow (along with its children) to the DOM
-
-                    database.ref().push(eventObj)
-                }
+                    database.ref().push(eventObj)                  }
             }
         });
-    })
+    });
 });
+ 
+
+
+$("body").on("click", ".openModal", function (event) {
+	let modalObj;
+	let buttonId = $(this).attr('data-open');
+	database.ref().once('value').then(function(snapshot) {
+		
+		snapshot.forEach(function (childSnapshot) {
+			if (childSnapshot.val().eventID === buttonId) {
+				modalObj = childSnapshot.val();
+			}
+		});
+	
+	
+    let modals = `
+		<div class="reveal" \id\="${modalObj.eventID}" data-reveal data-animation-\in\="fade-in" data-animation-\out\="fade-out">
+			<div class="results">
+				<div>
+					<p><span class="bold">title:</span> ${modalObj.title}</p>
+					
+					<p><span class="bold">address:</span> ${modalObj.address}</p>
+					
+					<p><span class="bold">venue:</span> ${modalObj.venue}</p>
+				</div>
+				
+				<div class="rightModalSection">
+					<p><span class="bold">time:</span> ${modalObj.start}</p>
+					<p><span class="bold">wristband color:</span> ${modalObj.color}</p>
+			  		<a href="${modalObj.url}" class="button tiny" target="_blank">Check Out Their Website!</a>
+			  	</div>
+				
+				<div \id\="googleMap">
+					<div \id\="map"></div>
+				</div>
+				
+				<div \id\="attendee">
+					<p><span class="bold">attendees:</span> ${modalObj.attendees}</p>
+				</div>
+				
+				<div \id\="rsvp" class="rightModalSection">
+					<button class="button tiny">RSVP now!</button>
+				</div>
+			</div>
+			
+			<button class="close-button" data-close aria-label="Close modal" type="button"><span aria-hidden="true">&times;</span></button>
+		</div>
+	`;
+	
+	document.body.innerHTML += modals;
+	$("#"+ modalObj.eventID).foundation();
+	$("#"+ modalObj.eventID).foundation('open');
+	
+	initMap (modalObj.lat, modalObject.long)
+	
+    });
+	
+	
+}); // end of the .openModal click event
+
+
+
+function initMap(latitude, longitude) {
+  var markerLocation = {lat: latitude, lng: longitude};
+  var map = new google.maps.Map(
+  document.getElementById('map'), {zoom: 12, center: markerLocation});
+  
+  var marker = new google.maps.Marker({position: markerLocation, map: map});
+}
 
 
 
 
-//click event for modal (-comment and code right below done by mohammed)
-$("body").on("click", ".eventRow", function (event) {
-    //modal activation goes here    
-    //modal reveal
-    var rowID = $(this).attr("data-event-id")
-    var id = $(this).attr("data-open");
-    let modalObj;
-    database.ref().once('value').then(function (snapshot) {
-        console.log(rowID)
-        snapshot.forEach(function (childSnapshot) {
-            if (childSnapshot.val().eventID === rowID) {
-                modalObj = childSnapshot.val();
-            }
-        });
-        var $modal = $('<div>');
-    $modal.attr('data-reveal', '');
-    $modal.addClass('reveal')
-    $modal.attr('id', id)
-    var title = $('<h1>').text(modalObj.title).addClass('leftModalSection');
-    var address = $('<h3>').text(modalObj.address).addClass('leftModalSection');
-    var venue = $('<h3>').text(modalObj.venue).addClass('leftModalSection');
-    var time = $('<h3>').text(modalObj.start).addClass('rightModalSection');
-    var wristbandColor = $('<h3>').text(modalObj.color).addClass('rightModalSection');
-    var attendees = $('<h3>').text(modalObj.attendees).addClass('leftModalSection').attr("id", "attendee")
-
-    $modal.append(title, address, venue, time, wristbandColor, attendees)
-    $modal.foundation();
-    console.log(modalObj)
-    //Modal Content
-    // var h1 = $('<h1>');
-    // h1.text(modalObj.title);
-    // var h3 = $('<h3>');
-    // h3.text(modalObj.venue_address);
-    // var p = $('<p>');
-    // p.text(modalObj.description);
-    //End Content
-
-    //Append/Prepend Content to modal
-    // $modal.append(h1);
-    // $modal.append(h3);
-    // $modal.append(p);
-    $("#modalContainer").append($modal);
-        console.log(modalObj)
-    
-    } );
-
-    
-        
-        
-        
-
-
-
-
-
-    // modalDiv.className = "reveal";
-
-
-
-
-});
 
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url

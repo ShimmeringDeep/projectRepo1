@@ -8,33 +8,32 @@
 
 /* global variables
 _____________________________________*/
-
-
-
-
-$blue: #246EB9;
-$white:#fdfffc;
-$darkestBlue: #0A1E33;
-$darkGrey: #353532;
-
-
-
-body {
-	background-color: $darkestBlue;
-}
-
-
-
-/* global variables
-____________________________*/
+$white: 		#ffffff; // white
+$black: 			#222629; // black
+$lightGreen: 		#86c232; // lightGreen
+$darkGreen:		#61892f; // darkGreen
+$lightGrey:		#6b6e70; // lightGrey
+$darkGrey: 		#474b4f; // darkGrey
 
 
 
 /* Google Fonts Link */
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One');
+@import url('https://fonts.googleapis.com/css?family=Cardo|Karla');
 
 * {
-	font-family: 'Fira Sans Condensed', sans-serif;
+	font-family: 'Karla', sans-serif;
+}
+
+.karla {
+	font-family: 'Karla', sans-serif;
+}
+
+.cardo {
+	font-family: 'Cardo', serif;
+}
+
+body {
+	background-color: $black;
 }
 
 h1,
@@ -42,33 +41,107 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-	 font-family: 'Patua One', cursive;
-	 color: $white;
-	 
+h6,
+span {
+	 font-family: 'Cardo', serif;
+	 color: $black;
 }
+
+/* Custom Color Classes */
+.white {
+	color: $white;
+}
+
+.lightGreen {
+	color: $lightGreen
+}
+
+.lightGrey {
+	color: $lightGrey;
+}
+
+.darkGrey {
+	color: $darkGrey;
+}
+
+.bold {
+	font-weight: bold;
+}
+
 .grid-container {
 	margin-top: 20vh;
-// this code makes the grid-container 20% of the viewport height, always.	
-	label, button {
-		background-color: $blue;
-		font-size: large;
-	
-	}
-	
-	#title {
-		margin-bottom: 30px;
-	}
+// this code makes the grid-container 20% of the viewport height, always.
+}
 
-} 
 
+.label, .button {
+	background-color: $lightGreen;
+	font-size: 1rem;
+}
+
+.button:hover {
+	background-color: $darkGreen;
+}
 
 .card-divider {
-	background-color: $darkGrey;
+	background-color: $lightGrey;
+}
+
+.card-section, .reveal {
+	background: $black;
+	color: $white;
+}
+
+.results {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding-top: 1rem;
+}
+
+.rightModalSection {
+	margin-left: auto;
+	text-align: right;
+}
+
+#googleMap {
+	grid-column: 1/3;
+}
+
+#map {
+	height: 14rem;  /* The height is 400 pixels */
+	width: 100%;  /* The width is the width of the web page */
+}
+
+#attendee, #rsvp {
+	margin-top: 1rem;
+}
+
+.button {
+	border-radius: .6rem;
+}
+
+
+.results {
+	span {
+		color: $white;
+	}
+}
+
+#mapsss {
+	height: 300px;
+	width: 600px;
 }
 
 
 
-
-
-
+@media (max-width: 850px) {
+	.results {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	
+	.rightModalSection {
+		margin-left: 0;
+		text-align: left;
+	}
+}
