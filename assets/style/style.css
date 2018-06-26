@@ -7,42 +7,101 @@
 */
 /* global variables
 _____________________________________*/
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One");
-body {
-  background-color: #0A1E33; }
-
 /* Google Fonts Link */
+@import url("https://fonts.googleapis.com/css?family=Cardo|Karla");
 * {
-  font-family: 'Fira Sans Condensed', sans-serif; }
+  font-family: 'Karla', sans-serif; }
+
+.karla {
+  font-family: 'Karla', sans-serif; }
+
+.cardo {
+  font-family: 'Cardo', serif; }
+
+body {
+  background-color: #222629; }
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: 'Patua One', cursive;
-  color: #fdfffc; }
+h6,
+span {
+  font-family: 'Cardo', serif;
+  color: #222629; }
+
+/* Custom Color Classes */
+.white {
+  color: #ffffff; }
+
+.lightGreen {
+  color: #86c232; }
+
+.lightGrey {
+  color: #6b6e70; }
+
+.darkGrey {
+  color: #474b4f; }
+
+.bold {
+  font-weight: bold; }
 
 .grid-container {
   margin-top: 20vh; }
-  .grid-container label, .grid-container button {
-    background-color: #246EB9;
-    font-size: large; }
-  .grid-container #title {
-    margin-bottom: 30px; }
+
+.label, .button {
+  background-color: #86c232;
+  font-size: 1rem; }
+
+.button:hover {
+  background-color: #61892f; }
 
 .card-divider {
-<<<<<<< HEAD
-  background-color: #353532; }
-=======
-  background-color: #353532;
-}
-td{
-  text-align: center;
-  margin: 0 auto;
-  
-}
->>>>>>> f4d9288a851e9a48d5cd4199ef42dd7a684afc5f
+  background-color: #6b6e70; }
+
+.card-section, .reveal {
+  background: #222629;
+  color: #ffffff; }
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 1rem; }
+
+.rightModalSection {
+  margin-left: auto;
+  text-align: right; }
+
+#googleMap {
+  grid-column: 1/3; }
+
+#map {
+  height: 14rem;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */ }
+
+#attendee, #rsvp {
+  margin-top: 1rem; }
+
+.button {
+  border-radius: .6rem; }
+
+.results span {
+  color: #ffffff; }
+
+#mapsss {
+  height: 300px;
+  width: 600px; }
+
+@media (max-width: 850px) {
+  .results {
+    display: grid;
+    grid-template-columns: 1fr; }
+
+  .rightModalSection {
+    margin-left: 0;
+    text-align: left; } }
 
 /*# sourceMappingURL=style.css.map */
