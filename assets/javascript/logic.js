@@ -199,5 +199,5 @@ $.ajax({ //geolocation ajax request
     url: locateUrl,
     method: 'POST',
 }).then(function (result) {
-//    console.log(result); //returns latitude and longitude and accuracy
+    console.log(result); //returns latitude and longitude and accuracy
 })

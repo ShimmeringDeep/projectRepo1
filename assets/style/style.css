@@ -7,6 +7,20 @@
 */
 /* global variables
 _____________________________________*/
+
+/*
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One");
+body {
+  background: url(../images/gathering.jpeg) no-repeat center center fixed;;
+}
+
+.div-title {
+  background-color: skyblue;
+}
+*/
+/* global variables
+____________________________*/
+
 /* Google Fonts Link */
 @import url("https://fonts.googleapis.com/css?family=Cardo|Karla");
 * {
@@ -26,6 +40,7 @@ h2,
 h3,
 h4,
 h5,
+
 h6,
 span {
   font-family: 'Cardo', serif;
@@ -57,7 +72,26 @@ span {
 .button:hover {
   background-color: #61892f; }
 
+/*h6 {
+  font-family: "Patua One", cursive;
+  color: orangered;
+}
+
+.grid-container {
+  margin-top: 20vh;
+}
+.grid-container label, .grid-container button {
+  background-color: orangered;
+  font-size: large;
+}
+.grid-container #title {
+  margin-bottom: 30px;
+}*/
+
+
+
 .card-divider {
+  
   background-color: #6b6e70; }
 
 .card-section, .reveal {
@@ -105,3 +139,39 @@ span {
     text-align: left; } }
 
 /*# sourceMappingURL=style.css.map */
+
+/*  background-color: skyblue;
+}
+
+#name, #venue, #date, #color, #attendees {
+  text-align: center;
+
+}
+
+
+
+table th {
+  background-color: skyblue;
+  
+}
+
+table tr:nth-child(odd) td {
+  background-color: skyblue;
+  
+}
+
+table tr:hover td {
+  background-color: orangered;
+  cursor: pointer;
+}
+
+table td {
+  border: 2px solid #e3e3e3;
+  padding: 10px;
+  
+}*/
+
+
+
+/*# sourceMappingURL=assets/style/style.css.map */
+
