@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyAo6OTFSK9YxITXg6wBELibFtbjiauhWak",
-    authDomain: "damojo-1529524386895.firebaseapp.com",
-    databaseURL: "https://damojo-1529524386895.firebaseio.com",
-    projectId: "damojo-1529524386895",
-    storageBucket: "",
-    messagingSenderId: "894180044792"
+	apiKey: "AIzaSyAo6OTFSK9YxITXg6wBELibFtbjiauhWak",
+	authDomain: "damojo-1529524386895.firebaseapp.com",
+	databaseURL: "https://damojo-1529524386895.firebaseio.com",
+	projectId: "damojo-1529524386895",
+	storageBucket: "",
+	messagingSenderId: "894180044792"
 };
 firebase.initializeApp(config);
 
@@ -19,56 +19,59 @@ const eventkey = "WVV7pQ6XZXdVrR9r" //eventful API key
 
 
 $("#submit").on("click", function (e) { //submit button click event (ajax call for eventful and DOM population happens in here)
+	e.preventDefault();
+	let eventUrl = "http://api.eventful.com/json/events/search" //query url for eventful
+	var locationInput = $("#eventLocationQuery").val().trim(); //grabs text value from the text imput field
+	$("#eventLocationQuery").val("") //clears the text field on next click
 
-    let eventUrl = "http://api.eventful.com/json/events/search" //query url for eventful
-    var locationInput = $("#eventLocationQuery").val().trim(); //grabs text value from the text imput field
-    $("#eventLocationQuery").val("") //clears the text field on next click
+	eventUrl += '?' + $.param({ //parameters for eventful query (we need a few more of these to make the returns cleaner)
+		'app_key': eventkey,
+		'location': locationInput,
+		'date': 'thisweek',
+		'category': 'music , comedy, festivals_parades, food, art, holiday, singles_social, outdoors_recreation, sports',
+		'sort_order': 'popularity',
+		'mature': 'normal',
+		'page_size': 25,
 
-    eventUrl += '?' + $.param({ //parameters for eventful query (we need a few more of these to make the returns cleaner)
-        'app_key': eventkey,
-        'location': locationInput,
-        'date': 'thisweek',
-        'category': 'music , comedy, festivals_parades, food, art, holiday, singles_social, outdoors_recreation, sports',
-        'sort_order': 'popularity'
+	})
 
-    })
+	$.ajax({
+		url: eventUrl,
+		method: 'GET',
+		dataType: 'jsonp'
+	}).then(function (result) {//after ajax query to eventful
+		var events = result.events.event; //grabs the location in the result where the events from our query are stored
+		console.log(events);
+		database.ref().once('value', function (snapshot) {
 
-    $.ajax({
-        url: eventUrl,
-        method: 'GET',
-        dataType: 'jsonp'
-    }).then(function (result) {//after ajax query to eventful
-        var events = result.events.event; //grabs the location in the result where the events from our query are stored
-        console.log(events);
-        database.ref().once('value', function (snapshot) {
+			for (var i = 0; i < events.length; i++) { //for loop populates the DOM and firebase with our returned events
+				var event = events[i]; //grabs the event in the event array at location [i]
+				var eventObj = {
+					title: event.title,
+					venue: event.venue_name,
+					start: moment(event.start_time).format('lll'),
+					address: event.venue_address,
+					description: event.description,
+					eventID: event.id,
+					color: colors[Math.floor(Math.random() * colors.length)],
+					attendees: 0,
+					lat: event.latitude,
+					long: event.longitude,
+					url: event.url
+				};
 
-            for (var i = 0; i < events.length; i++) { //for loop populates the DOM and firebase with our returned events
-                var event = events[i]; //grabs the event in the event array at location [i]
-                var eventObj = {
-                    title: event.title,
-                    venue: event.venue_name,
-                    start: event.start_time,
-                    address: event.venue_address,
-                    description: event.description,
-                    eventID: event.id,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    attendees: 0,
-                    lat: event.latitude,
-                    long: event.longitude
-                };
+				var checkArr = [];
+				snapshot.forEach(function (childSnapshot) {
+					if (childSnapshot.val().eventID === event.id) {
+						checkArr.push(childSnapshot.val());
+					}
+				});
 
-                var checkArr = [];
-                snapshot.forEach(function (childSnapshot) {
-                    if (childSnapshot.val().eventID === event.id) {
-                        checkArr.push(childSnapshot.val());
-                    }
-                });
+				if (checkArr.length > 0) {
+					console.log(checkArr[0]);
+					eventObj = checkArr[0];
 
-                if (checkArr.length > 0) {
-                    console.log(checkArr[0]);
-                    eventObj = checkArr[0];
-					  
-					  let results = `
+					let results = `
 					  <div data-event-\id\="${event.id}" class="results">
 					  	<div>
 					  		<p><span class="bold">title:</span> ${eventObj.title}</p>
@@ -88,10 +91,10 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 					  </div>
 					  <hr />
 					  `;
-	
-					  document.querySelector('#primaryResults').innerHTML += results;
-                } else {
-                   let results = `
+
+					document.querySelector('#primaryResults').innerHTML += results;
+				} else {
+					let results = `
                    	<div data-event-\id\="${event.id}" class="results">
                    		<div>
                    			<p><span class="bold">title:</span> ${eventObj.title}</p>
@@ -102,7 +105,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                    		</div>
                    				  	
                    		<div class="rightModalSection">
-                   			<p><span class="bold">attendees:</span> ${eventObj.attendees}</p>
+                   			<p><span class="bold" >attendees:</span> ${eventObj.attendees}</p>
                    				  		
                    			<p><span class="bold">wristband color:</span> ${eventObj.color}</p>
                    				  		
@@ -110,30 +113,31 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                    		</div>
                    	</div>
                    	<hr /> `;
-                   
-                   	document.querySelector('#primaryResults').innerHTML += results;
 
-                    database.ref().push(eventObj)                  }
-            }
-        });
-    });
+					document.querySelector('#primaryResults').innerHTML += results;
+
+					database.ref().push(eventObj)
+				}
+			}
+		});
+	});
 });
- 
+
 
 
 $("body").on("click", ".openModal", function (event) {
 	let modalObj;
 	let buttonId = $(this).attr('data-open');
-	database.ref().once('value').then(function(snapshot) {
-		
+	database.ref().once('value').then(function (snapshot) {
+
 		snapshot.forEach(function (childSnapshot) {
 			if (childSnapshot.val().eventID === buttonId) {
 				modalObj = childSnapshot.val();
 			}
 		});
-	
-	
-    let modals = `
+
+
+		let modals = `
 		<div class="reveal" \id\="${modalObj.eventID}" data-reveal data-animation-\in\="fade-in" data-animation-\out\="fade-out">
 			<div class="results">
 				<div>
@@ -155,64 +159,67 @@ $("body").on("click", ".openModal", function (event) {
 				</div>
 				
 				<div \id\="attendee${modalObj.eventID}">
-					<p><span class="bold">attendees:</span> ${modalObj.attendees}</p>
+					<p><span class="bold">attendees:</span> <span \id\="attendees${modalObj.eventID}">${modalObj.attendees}</span></p>
 				</div>
 				
 				<div \id\="rsvp${modalObj.eventID}" class="rightModalSection">
-					<button class="button tiny" data-event-id="${modalObj.eventID}">RSVP now!</button>
+					<button class="button tiny rsvp" data-event-id="${modalObj.eventID}">RSVP now!</button>
 				</div>
 			</div>
 			
 			<button class="close-button" data-close aria-label="Close modal" type="button"><span aria-hidden="true">&times;</span></button>
 		</div>
 	`;
-	
-	document.body.innerHTML += modals;
-	$("#"+ modalObj.eventID).foundation();
-	$("#"+ modalObj.eventID).foundation('open');
-	
-	var mapID = "map" + modalObj.eventID;
-	var mapDiv = document.getElementById(mapID);
-	var location = {lat : parseFloat(modalObj.lat) , lng :  parseFloat(modalObj.long)};
 
-	function initMap() {
-		console.log('map' + modalObj.eventID)
-		//The location of Uluru
-	   // The map, centered at Uluru
-	   var map = new google.maps.Map(
-		mapDiv, {zoom: 12, center: location});
-		//The marker, positioned at Uluru
-	   var marker = new google.maps.Marker({position: location, map: map});
-	 }
+		document.body.innerHTML += modals;
+		$("#" + modalObj.eventID).foundation();
+		$("#" + modalObj.eventID).foundation('open');
 
-	 initMap();
-    });
-	
-	
+		var mapID = "map" + modalObj.eventID;
+		var mapDiv = document.getElementById(mapID);
+		var location = { lat: parseFloat(modalObj.lat), lng: parseFloat(modalObj.long) };
+
+		function initMap() {
+			console.log('map' + modalObj.eventID)
+			//The location of Uluru
+			// The map, centered at Uluru
+			var map = new google.maps.Map(
+				mapDiv, { zoom: 12, center: location });
+			//The marker, positioned at Uluru
+			var marker = new google.maps.Marker({ position: location, map: map });
+		}
+
+		initMap();
+	});
+
+
 }); // end of the .openModal click event
 
+$("body").on("click", ".rsvp", function (event) {
+	let rsvpObj;
+	let buttonId = $(this).attr('data-event-id');
+	database.ref().once('value').then(function (snapshot) {
 
+		var fbkey;
+		snapshot.forEach(function (childSnapshot) {
+			if (childSnapshot.val().eventID === buttonId) {
+				rsvpObj = childSnapshot.val();
+				fbkey = childSnapshot.key;
+			}
+		});
+		let attendeeCount = parseInt(rsvpObj.attendees);
+		attendeeCount ++;
+		database.ref().child(fbkey).update({ attendees: attendeeCount });
+		$('#attendees'+rsvpObj.eventID).text(attendeeCount);
 
- 
-
-// function initMap(latitude, longitude) {
-//   var markerLocation = {lat: latitude, lng: longitude};
-//   var map = new google.maps.Map(
-//   document.getElementById('map'), {zoom: 12, center: markerLocation});
-  
-//   var marker = new google.maps.Marker({position: markerLocation, map: map});
-// }
-
-
-
-
-
+	});
+});
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url
 
 $.ajax({ //geolocation ajax request
-    url: locateUrl,
-    method: 'POST',
+	url: locateUrl,
+	method: 'POST',
 }).then(function (result) {
-    console.log(result); //returns latitude and longitude and accuracy
+	console.log(result); //returns latitude and longitude and accuracy
 })
