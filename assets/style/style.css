@@ -7,22 +7,9 @@
 */
 /* global variables
 _____________________________________*/
-
-/*
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Patua+One");
-body {
-  background: url(../images/gathering.jpeg) no-repeat center center fixed;;
-}
-
-.div-title {
-  background-color: skyblue;
-}
-*/
-/* global variables
-____________________________*/
-
 /* Google Fonts Link */
 @import url("https://fonts.googleapis.com/css?family=Cardo|Karla");
+/* Universal */
 * {
   font-family: 'Karla', sans-serif; }
 
@@ -33,14 +20,13 @@ ____________________________*/
   font-family: 'Cardo', serif; }
 
 body {
-  background-color: #222629; }
+  background-image: radial-gradient(circle, #474b4f 0%, #474b4f 35%, #222629 100%); }
 
 h1,
 h2,
 h3,
 h4,
 h5,
-
 h6,
 span {
   font-family: 'Cardo', serif;
@@ -65,33 +51,79 @@ span {
 .grid-container {
   margin-top: 20vh; }
 
+/* Buttons and Labels */
+.button {
+  border-radius: .6rem; }
+
+.close-button {
+  color: #ffffff;
+  padding: .2rem .4rem; }
+
 .label, .button {
   background-color: #86c232;
   font-size: 1rem; }
 
 .button:hover {
+  background-color: #6b6e70; }
+
+.button:focus {
+  background-color: #474b4f; }
+
+.button:visited {
   background-color: #61892f; }
 
-/*h6 {
-  font-family: "Patua One", cursive;
-  color: orangered;
-}
+.button:active {
+  background-color: #61892f; }
 
-.grid-container {
-  margin-top: 20vh;
-}
-.grid-container label, .grid-container button {
-  background-color: orangered;
-  font-size: large;
-}
-.grid-container #title {
-  margin-bottom: 30px;
-}*/
+.rsvp {
+  margin-top: 1rem; }
 
+/* Spinner */
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px; }
 
+.spinner > div {
+  background-color: #86c232;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out; }
 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s; }
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s; }
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s; }
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    -webkit-transform: scaleY(1); } }
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1); } }
+/* Primary Results Card */
 .card-divider {
-  
   background-color: #6b6e70; }
 
 .card-section, .reveal {
@@ -102,7 +134,11 @@ span {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-top: 1rem; }
+  .results span {
+    color: #86c232;
+    text-transform: capitalize; }
 
+/* Modal */
 .rightModalSection {
   margin-left: auto;
   text-align: right; }
@@ -119,59 +155,21 @@ span {
 #attendee, #rsvp {
   margin-top: 1rem; }
 
-.button {
-  border-radius: .6rem; }
-
-.results span {
-  color: #ffffff; }
-
 #mapsss {
   height: 300px;
   width: 600px; }
 
-@media (max-width: 850px) {
+/* Media Queries */
+@media (max-width: 40em) {
   .results {
     display: grid;
     grid-template-columns: 1fr; }
 
   .rightModalSection {
     margin-left: 0;
-    text-align: left; } }
+    text-align: left; }
+
+  .openModal {
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
-
-/*  background-color: skyblue;
-}
-
-#name, #venue, #date, #color, #attendees {
-  text-align: center;
-
-}
-
-
-
-table th {
-  background-color: skyblue;
-  
-}
-
-table tr:nth-child(odd) td {
-  background-color: skyblue;
-  
-}
-
-table tr:hover td {
-  background-color: orangered;
-  cursor: pointer;
-}
-
-table td {
-  border: 2px solid #e3e3e3;
-  padding: 10px;
-  
-}*/
-
-
-
-/*# sourceMappingURL=assets/style/style.css.map */
-

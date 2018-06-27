@@ -17,6 +17,16 @@ const colors = ["Orange", "Green", "Blue", "Red", "Purple", "White", "Yellow"]
 const locKey = "AIzaSyAS7eVhjgd7vDmyAMGzCzygJ2q1sf1kXKo" //geolocation API key for later implementation (ajax call working at bottom)
 const eventkey = "WVV7pQ6XZXdVrR9r" //eventful API key
 
+const spinner = `
+<div class="spinner">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+</div>
+`;
+
 
 $("#submit").on("click", function (e) { //submit button click event (ajax call for eventful and DOM population happens in here)
 	e.preventDefault();
@@ -38,7 +48,21 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 	$.ajax({
 		url: eventUrl,
 		method: 'GET',
-		dataType: 'jsonp'
+
+		dataType: 'jsonp',
+		// Creates a f(x) that runs while the Ajax call is being completed. the f(x) will loop through the #primaryResults ID and removed each child node.
+		beforeSend: function() {
+			const primaryResults = document.querySelector('#primaryResults');
+			while (primaryResults.firstChild) {
+				primaryResults.removeChild(primaryResults.firstChild);
+			}
+			
+			primaryResults.innerHTML += spinner; // Populate the #primaryResults ID with the CSS spinner
+		},
+		// Creates a f(x) that deletes the CSS spinner as soon as the Ajax call is done
+		complete: function() {
+			document.querySelector('.spinner').style.display = 'none';
+		}
 	}).then(function (result) {//after ajax query to eventful
 		var events = result.events.event; //grabs the location in the result where the events from our query are stored
 		console.log(events);
@@ -86,7 +110,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 					  		
 					  		<p><span class="bold">wristband color:</span> ${eventObj.color}</p>
 					  		
-					  		<button class="button small openModal" data-open="${event.id}">More Info!</button>
+					  		<button class="button small openModal" data-open="${event.id}">More Info</button>
 					  	</div>
 					  </div>
 					  <hr />
@@ -109,12 +133,13 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
                    				  		
                    			<p><span class="bold">wristband color:</span> ${eventObj.color}</p>
                    				  		
-                   			<button class="button small openModal" data-open="${event.id}">More Info!</button>
+                   			<button class="button small openModal" data-open="${event.id}">More Info</button>
                    		</div>
                    	</div>
                    	<hr /> `;
 
 					document.querySelector('#primaryResults').innerHTML += results;
+
 
 					database.ref().push(eventObj)
 				}
@@ -122,8 +147,6 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 		});
 	});
 });
-
-
 
 $("body").on("click", ".openModal", function (event) {
 	let modalObj;
@@ -150,7 +173,7 @@ $("body").on("click", ".openModal", function (event) {
 				
 				<div class="rightModalSection">
 					<p><span class="bold">time:</span> ${modalObj.start}</p>
-					<p><span class="bold">wristband color:</span> ${modalObj.color}</p>
+					<p><span class="bold">wristband color:</span>  <span style="color: ${modalObj.color};">${modalObj.color}</span></p>
 			  		<a href="${modalObj.url}" class="button tiny" target="_blank">Check Out Their Website!</a>
 			  	</div>
 				
@@ -159,15 +182,18 @@ $("body").on("click", ".openModal", function (event) {
 				</div>
 				
 				<div \id\="attendee${modalObj.eventID}">
-					<p><span class="bold">attendees:</span> <span \id\="attendees${modalObj.eventID}">${modalObj.attendees}</span></p>
+
+					<p class="rsvp"><span class="bold">attendees:</span> <span \id\="attendees${modalObj.eventID}">${modalObj.attendees}</span></p>
 				</div>
 				
 				<div \id\="rsvp${modalObj.eventID}" class="rightModalSection">
-					<button class="button tiny rsvp" data-event-id="${modalObj.eventID}">RSVP now!</button>
+					<button class="button tiny rsvp" data-event-id="${modalObj.eventID}">RSVP now</button>
+
+
 				</div>
 			</div>
 			
-			<button class="close-button" data-close aria-label="Close modal" type="button"><span aria-hidden="true">&times;</span></button>
+			<button class="close-button button" data-close aria-label="Close modal" type="button"><span aria-hidden="true">&times;</span></button>
 		</div>
 	`;
 
@@ -200,6 +226,7 @@ $("body").on("click", ".rsvp", function (event) {
 	let buttonId = $(this).attr('data-event-id');
 	database.ref().once('value').then(function (snapshot) {
 
+
 		var fbkey;
 		snapshot.forEach(function (childSnapshot) {
 			if (childSnapshot.val().eventID === buttonId) {
@@ -213,6 +240,14 @@ $("body").on("click", ".rsvp", function (event) {
 		$('#attendees'+rsvpObj.eventID).text(attendeeCount);
 
 	});
+});
+
+
+$("#submit").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submit").click();
+    }
+
 });
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url
