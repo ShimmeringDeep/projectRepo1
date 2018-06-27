@@ -30,7 +30,7 @@ const spinner = `
 
 $("#submit").on("click", function (e) { //submit button click event (ajax call for eventful and DOM population happens in here)
 	e.preventDefault();
-	let eventUrl = "http://api.eventful.com/json/events/search" //query url for eventful
+	let eventUrl = "https://api.eventful.com/json/events/search" //query url for eventful
 	var locationInput = $("#eventLocationQuery").val().trim(); //grabs text value from the text imput field
 	$("#eventLocationQuery").val("") //clears the text field on next click
 
