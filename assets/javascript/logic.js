@@ -48,6 +48,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 	$.ajax({
 		url: eventUrl,
 		method: 'GET',
+
 		dataType: 'jsonp',
 		// Creates a f(x) that runs while the Ajax call is being completed. the f(x) will loop through the #primaryResults ID and removed each child node.
 		beforeSend: function() {
@@ -139,6 +140,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 
 					document.querySelector('#primaryResults').innerHTML += results;
 
+
 					database.ref().push(eventObj)
 				}
 			}
@@ -180,11 +182,14 @@ $("body").on("click", ".openModal", function (event) {
 				</div>
 				
 				<div \id\="attendee${modalObj.eventID}">
+
 					<p class="rsvp"><span class="bold">attendees:</span> <span \id\="attendees${modalObj.eventID}">${modalObj.attendees}</span></p>
 				</div>
 				
 				<div \id\="rsvp${modalObj.eventID}" class="rightModalSection">
 					<button class="button tiny rsvp" data-event-id="${modalObj.eventID}">RSVP now</button>
+
+
 				</div>
 			</div>
 			
@@ -221,6 +226,7 @@ $("body").on("click", ".rsvp", function (event) {
 	let buttonId = $(this).attr('data-event-id');
 	database.ref().once('value').then(function (snapshot) {
 
+
 		var fbkey;
 		snapshot.forEach(function (childSnapshot) {
 			if (childSnapshot.val().eventID === buttonId) {
@@ -236,11 +242,12 @@ $("body").on("click", ".rsvp", function (event) {
 	});
 });
 
-// This line of code makes enter key equal to a click (=
+
 $("#submit").keyup(function(event) {
     if (event.keyCode === 13) {
         $("#submit").click();
     }
+
 });
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url
