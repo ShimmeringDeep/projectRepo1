@@ -10,7 +10,7 @@
 _____________________________________*/
 $white: 		#ffffff; // white
 $black: 			#222629; // black
-$lightGreen: 		#86c232; // lightGreen
+$lightGreen: 	#86c232; // lightGreen
 $darkGreen:		#61892f; // darkGreen
 $lightGrey:		#6b6e70; // lightGrey
 $darkGrey: 		#474b4f; // darkGrey
@@ -19,6 +19,8 @@ $darkGrey: 		#474b4f; // darkGrey
 
 /* Google Fonts Link */
 @import url('https://fonts.googleapis.com/css?family=Cardo|Karla');
+
+/* Universal */
 
 * {
 	font-family: 'Karla', sans-serif;
@@ -70,7 +72,17 @@ span {
 
 .grid-container {
 	margin-top: 20vh;
-// this code makes the grid-container 20% of the viewport height, always.
+}
+
+
+/* Buttons and Labels */
+.button {
+	border-radius: .6rem;
+}
+
+.close-button {
+	color: $white;
+	padding: .2rem .4rem;
 }
 
 
@@ -80,8 +92,24 @@ span {
 }
 
 .button:hover {
+	background-color: $lightGrey;
+}
+
+.button:focus {
+	background-color: $darkGrey;
+}
+
+.button:visited {
 	background-color: $darkGreen;
 }
+
+.button:active {
+	background-color: $darkGreen;
+}
+
+
+
+/* Primary Results Card */
 
 .card-divider {
 	background-color: $lightGrey;
@@ -97,6 +125,14 @@ span {
 	grid-template-columns: 1fr 1fr;
 	padding-top: 1rem;
 }
+
+.results {
+	span {
+		color: $lightGreen;
+	}
+}
+
+/* Modal */
 
 .rightModalSection {
 	margin-left: auto;
@@ -116,25 +152,15 @@ span {
 	margin-top: 1rem;
 }
 
-.button {
-	border-radius: .6rem;
-}
-
-
-.results {
-	span {
-		color: $white;
-	}
-}
-
 #mapsss {
 	height: 300px;
 	width: 600px;
 }
 
 
+/* Media Queries */
 
-@media (max-width: 850px) {
+@media (max-width: 40em) {
 	.results {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -143,5 +169,9 @@ span {
 	.rightModalSection {
 		margin-left: 0;
 		text-align: left;
+	}
+	
+	.openModal {
+		width: 100%;
 	}
 }

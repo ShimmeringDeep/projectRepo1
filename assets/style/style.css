@@ -9,6 +9,7 @@
 _____________________________________*/
 /* Google Fonts Link */
 @import url("https://fonts.googleapis.com/css?family=Cardo|Karla");
+/* Universal */
 * {
   font-family: 'Karla', sans-serif; }
 
@@ -50,13 +51,31 @@ span {
 .grid-container {
   margin-top: 20vh; }
 
+/* Buttons and Labels */
+.button {
+  border-radius: .6rem; }
+
+.close-button {
+  color: #ffffff;
+  padding: .2rem .4rem; }
+
 .label, .button {
   background-color: #86c232;
   font-size: 1rem; }
 
 .button:hover {
+  background-color: #6b6e70; }
+
+.button:focus {
+  background-color: #474b4f; }
+
+.button:visited {
   background-color: #61892f; }
 
+.button:active {
+  background-color: #61892f; }
+
+/* Primary Results Card */
 .card-divider {
   background-color: #6b6e70; }
 
@@ -69,6 +88,10 @@ span {
   grid-template-columns: 1fr 1fr;
   padding-top: 1rem; }
 
+.results span {
+  color: #86c232; }
+
+/* Modal */
 .rightModalSection {
   margin-left: auto;
   text-align: right; }
@@ -85,23 +108,21 @@ span {
 #attendee, #rsvp {
   margin-top: 1rem; }
 
-.button {
-  border-radius: .6rem; }
-
-.results span {
-  color: #ffffff; }
-
 #mapsss {
   height: 300px;
   width: 600px; }
 
-@media (max-width: 850px) {
+/* Media Queries */
+@media (max-width: 40em) {
   .results {
     display: grid;
     grid-template-columns: 1fr; }
 
   .rightModalSection {
     margin-left: 0;
-    text-align: left; } }
+    text-align: left; }
+
+  .openModal {
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
