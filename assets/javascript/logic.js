@@ -48,6 +48,7 @@ $("#submit").on("click", function (e) { //submit button click event (ajax call f
 	$.ajax({
 		url: eventUrl,
 		method: 'GET',
+		dataType : 'jsonp',
 
 		// dataType: 'jsonp',
 		// Creates a f(x) that runs while the Ajax call is being completed. the f(x) will loop through the #primaryResults ID and removed each child node.
@@ -243,12 +244,6 @@ $("body").on("click", ".rsvp", function (event) {
 });
 
 
-$("#submit").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#submit").click();
-    }
-
-});
 
 let locateUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + locKey //geolocation url
 
