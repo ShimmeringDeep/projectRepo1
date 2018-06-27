@@ -35,7 +35,7 @@ $darkGrey: 		#474b4f; // darkGrey
 }
 
 body {
-	background-color: $black;
+	background-image: radial-gradient(circle, rgba(71,75,79,1) 0%, rgba(71,75,79,1) 35%, rgba(34,38,41,1) 100%);
 }
 
 h1,
@@ -107,7 +107,63 @@ span {
 	background-color: $darkGreen;
 }
 
+.rsvp {
+	margin-top: 1rem;
+}
 
+/* Spinner */
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner > div {
+  background-color: $lightGreen;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
 
 /* Primary Results Card */
 
@@ -124,14 +180,13 @@ span {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	padding-top: 1rem;
-}
-
-.results {
+	
 	span {
 		color: $lightGreen;
+		text-transform: capitalize;
 	}
 }
-
+ 
 /* Modal */
 
 .rightModalSection {
@@ -143,7 +198,7 @@ span {
 	grid-column: 1/3;
 }
 
-#map {
+.map {
 	height: 14rem;  /* The height is 400 pixels */
 	width: 100%;  /* The width is the width of the web page */
 }
