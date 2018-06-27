@@ -151,15 +151,15 @@ $("body").on("click", ".openModal", function (event) {
 			  	</div>
 				
 				<div \id\="googleMap">
-					<div \id\="map"></div>
+					<div class="map" \id\="map${modalObj.eventID}"></div>
 				</div>
 				
-				<div \id\="attendee">
+				<div \id\="attendee${modalObj.eventID}">
 					<p><span class="bold">attendees:</span> ${modalObj.attendees}</p>
 				</div>
 				
-				<div \id\="rsvp" class="rightModalSection">
-					<button class="button tiny">RSVP now!</button>
+				<div \id\="rsvp${modalObj.eventID}" class="rightModalSection">
+					<button class="button tiny" data-event-id="${modalObj.eventID}">RSVP now!</button>
 				</div>
 			</div>
 			
@@ -171,8 +171,21 @@ $("body").on("click", ".openModal", function (event) {
 	$("#"+ modalObj.eventID).foundation();
 	$("#"+ modalObj.eventID).foundation('open');
 	
-	initMap (modalObj.lat, modalObject.long)
-	
+	var mapID = "map" + modalObj.eventID;
+	var mapDiv = document.getElementById(mapID);
+	var location = {lat : parseFloat(modalObj.lat) , lng :  parseFloat(modalObj.long)};
+
+	function initMap() {
+		console.log('map' + modalObj.eventID)
+		//The location of Uluru
+	   // The map, centered at Uluru
+	   var map = new google.maps.Map(
+		mapDiv, {zoom: 12, center: location});
+		//The marker, positioned at Uluru
+	   var marker = new google.maps.Marker({position: location, map: map});
+	 }
+
+	 initMap();
     });
 	
 	
@@ -180,13 +193,15 @@ $("body").on("click", ".openModal", function (event) {
 
 
 
-function initMap(latitude, longitude) {
-  var markerLocation = {lat: latitude, lng: longitude};
-  var map = new google.maps.Map(
-  document.getElementById('map'), {zoom: 12, center: markerLocation});
+ 
+
+// function initMap(latitude, longitude) {
+//   var markerLocation = {lat: latitude, lng: longitude};
+//   var map = new google.maps.Map(
+//   document.getElementById('map'), {zoom: 12, center: markerLocation});
   
-  var marker = new google.maps.Marker({position: markerLocation, map: map});
-}
+//   var marker = new google.maps.Marker({position: markerLocation, map: map});
+// }
 
 
 
